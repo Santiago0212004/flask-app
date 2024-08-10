@@ -21,7 +21,12 @@
 
         <div id="tasks">
             {% for task in tasks %}
-                <div class="task-card {% if task.is_completed %}completed{% endif %} {% if task.due_date < now %}overdue{% endif %}">
+                <div class="task-card 
+                {% if task.is_completed %}
+                    Completada
+                {% elif task.due_date < now %}
+                    Atrasada
+                {% endif %}">
                     <p>{{ task.content }}</p>
                     <p>Fecha de entrega: {{ task.due_date.strftime('%Y-%m-%d') }}</p>
                     <p>Autor: {{ task.author.username }}</p>
