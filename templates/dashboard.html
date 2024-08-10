@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="main-content">
+        <h2>Dashboard</h2>
+        <form action="{{ url_for('add_task') }}" method="POST">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.content.label }}
+                {{ form.content() }}
+            </div>
+            <div>
+                {{ form.due_date.label }}
+                {{ form.due_date(type='date') }}
+            </div>
+            {{ form.submit() }}
+        </form>
+
+        <input type="text" id="search" placeholder="Search tasks...">
+
+        <div id="tasks">
+            {% for task in tasks %}
+                <div class="task-card {% if task.is_completed %}completed{% endif %} {% if task.due_date < now %}overdue{% endif %}">
+                    <p>{{ task.content }}</p>
+                    <p>Due: {{ task.due_date.strftime('%Y-%m-%d') }}</p>
+                    <p>Author: {{ task.author.username }}</p>
+                    <a href="{{ url_for('toggle_task', task_id=task.id) }}">
+                        {% if task.is_completed %}Mark as Pending{% else %}Mark as Completed{% endif %}
+                    </a>
+                    <button onclick="showEditForm({{ task.id }})">Edit</button>
+                    <a href="{{ url_for('delete_task', task_id=task.id) }}">Delete</a>
+                    <form id="edit-form-{{ task.id }}" style="display: none;" action="{{ url_for('edit_task', task_id=task.id) }}" method="POST">
+                        <input type="date" name="new_due_date" value="{{ task.due_date.strftime('%Y-%m-%d') }}">
+                        <input type="submit" value="Update">
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="sidebar">
+        <h3>{{ team.name }}</h3>
+        <div class="team-members">
+            <h4>Team Members:</h4>
+            <div class="members-list">
+                {% for member in team_members %}
+                    <div class="member-card">
+                        <p>{{ member.username }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function showEditForm(taskId) {
+    document.getElementById(`edit-form-${taskId}`).style.display = 'block';
+}
+
+document.getElementById('search').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    document.querySelectorAll('.task-card').forEach(card => {
+        const taskContent = card.querySelector('p').textContent.toLowerCase();
+        if (taskContent.includes(searchTerm)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
+</script>
+{% endblock %}
