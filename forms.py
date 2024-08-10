@@ -4,22 +4,22 @@ from wtforms.validators import DataRequired, EqualTo
 from models import Team
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Log In')
+    username = StringField('Nombre de usuario', validators=[DataRequired()])
+    password = PasswordField('Contraseña', validators=[DataRequired()])
+    submit = SubmitField('Iniciar Sesión')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    team = SelectField('Team', coerce=int, validators=[DataRequired()])
-    submit = SubmitField('Register')
+    username = StringField('Nombre de usuario', validators=[DataRequired()])
+    password = PasswordField('Contraseña', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirmar contraseña', validators=[DataRequired(), EqualTo('password')])
+    team = SelectField('Equipo de trabajo', coerce=int, validators=[DataRequired()])
+    submit = SubmitField('Registrarse')
 
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
         self.team.choices = [(team.id, team.name) for team in Team.query.all()]
 
 class TaskForm(FlaskForm):
-    content = TextAreaField('Task Content', validators=[DataRequired()])
-    due_date = DateField('Due Date', validators=[DataRequired()])
-    submit = SubmitField('Add Task')
+    content = TextAreaField('Contenido de la tarea', validators=[DataRequired()])
+    due_date = DateField('Fecha de entrega', validators=[DataRequired()])
+    submit = SubmitField('Añadir tarea')

@@ -23,13 +23,13 @@
             {% for task in tasks %}
                 <div class="task-card {% if task.is_completed %}completed{% endif %} {% if task.due_date < now %}overdue{% endif %}">
                     <p>{{ task.content }}</p>
-                    <p>Due: {{ task.due_date.strftime('%Y-%m-%d') }}</p>
-                    <p>Author: {{ task.author.username }}</p>
+                    <p>Fecha de entrega: {{ task.due_date.strftime('%Y-%m-%d') }}</p>
+                    <p>Autor: {{ task.author.username }}</p>
                     <a href="{{ url_for('toggle_task', task_id=task.id) }}">
-                        {% if task.is_completed %}Mark as Pending{% else %}Mark as Completed{% endif %}
+                        {% if task.is_completed %}Marcar como pendiente{% else %}Marcar como completada{% endif %}
                     </a>
                     <button onclick="showEditForm({{ task.id }})">Edit</button>
-                    <a href="{{ url_for('delete_task', task_id=task.id) }}">Delete</a>
+                    <a href="{{ url_for('delete_task', task_id=task.id) }}">Eliminar</a>
                     <form id="edit-form-{{ task.id }}" style="display: none;" action="{{ url_for('edit_task', task_id=task.id) }}" method="POST">
                         <input type="date" name="new_due_date" value="{{ task.due_date.strftime('%Y-%m-%d') }}">
                         <input type="submit" value="Update">
@@ -42,7 +42,7 @@
     <div class="sidebar">
         <h3>{{ team.name }}</h3>
         <div class="team-members">
-            <h4>Team Members:</h4>
+            <h4>Miembros del equipo:</h4>
             <div class="members-list">
                 {% for member in team_members %}
                     <div class="member-card">
