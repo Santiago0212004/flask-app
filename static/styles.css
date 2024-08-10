@@ -10,17 +10,25 @@ nav {
 }
 
 .task-card {
+    border-radius: 4px;
     border: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 10px;
 }
 
+.pending {
+    background-color: #ffffe6; 
+    border-left: 5px solid #ffcc66;
+}
+
 .completed {
     background-color: #e6ffe6;
+    border-left: 5px solid #66cc66;
 }
 
 .overdue {
-    border-color: #ff6666;
+    background-color: #ffe6e6;
+    border-left: 5px solid #ff6666;
 }
 
 form {
@@ -52,6 +60,7 @@ input[type="submit"]:hover {
 
 .main-content {
     width: 70%;
+    margin: 20px;
 }
 
 .sidebar {
