@@ -28,7 +28,7 @@ Pasos para configurar el proyecto:
 
    
 8. Instalar las dependencias:
-  ```pip install -r requirements. txt```
+  ```pip install -r requirements.txt```
 
 9. Ejecutar el archivo de inicialización:
    ```python init.py```
