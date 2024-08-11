@@ -34,4 +34,4 @@ Pasos para configurar el proyecto:
 9. Ejecutar la aplicación:
    ```python app.py``` 
 
-10. Para salir detener la ejecución presionar ```ctrl+C``` y escribir ```deactivate```
+10. Para detener la ejecución presionar ```ctrl+C```, y para salir del entorno virtual escribir ```deactivate```
