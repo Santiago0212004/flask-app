@@ -18,7 +18,7 @@ Pasos para configurar el proyecto:
 5. Activar el entorno virtual:
    ```venv/bin/activate```
 
-6. En caso de que aparezcan errores de las librerías, cambiar el python interpreter por el del entorno virtual:
+6. En caso de que aparezcan errores de las librerías, escribir ```ctrl+P```, luego escribir ```>``` y cambiar el python interpreter por el del entorno virtual:
 
    ![image](https://github.com/user-attachments/assets/2dd8b83a-b985-4378-b76c-30668874d395)
 
@@ -33,3 +33,5 @@ Pasos para configurar el proyecto:
 
 9. Ejecutar la aplicación:
    ```python app.py``` 
+
+10. Para salir detener la ejecución presionar ```ctrl+C``` y escribir ```deactivate```
