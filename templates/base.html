@@ -10,12 +10,11 @@
     <nav>
         {% if current_user.is_authenticated %}
             <span>Bienvenido, {{ current_user.username }}</span>
-            <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+            <a href="{{ url_for('logout') }}" class="btn-menuBar-CerrarSesion">Cerrar sesión</a>
         {% else %}
-            <a href="{{ url_for('login') }}">Iniciar sesión</a>
-            <a href="{{ url_for('register') }}">Registrarse</a>
+        
         {% endif %}
-    </nav>
+    </nav>    
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul class="flashes">

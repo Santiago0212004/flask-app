@@ -1,88 +1,310 @@
+:root {
+    /* Paleta de Colores */
+    --color-primary: #FF914D;
+    --color-primary-dark: #e78446;
+    --color-secondary: #3b82f6;
+    --color-danger: #ef4444;
+    --color-danger-dark: #dc2626;
+    --color-success: #10b981;
+    --color-success-dark: #059669;
+    --color-warning: #e4b704;
+    --color-warning-light: #00811e;
+    --color-light: #ffffff;
+    --color-dark: #F5F3F0;
+    --color-nav: #2D2D35;
+    --color-gray: #8d8da5;
+    --color-gray-light: #7D7D93;
+    --color-gray-dark: #5b5b69;
+    --color-background: #20232A;
+    --color-block: #2D2D35;
+    --color-block-light: #34343D;
+}
+
 body {
     font-family: Arial, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-dark);
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.container, .dashboard-container {
+    display: flex;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
+.dashboard-container {
+    margin-top: 16vh;
+    background-color: var(--color-block-light);
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.container {
+    margin-top: 16vh;
+    background-color: var(--color-block);
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    width: 24vw;
+    border-radius: 10px;
+}
+
+/* Navigation */
 nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--color-nav);
+    color: var(--color-light);
+    font-size: 16px;
     margin-bottom: 20px;
+    height: 6vh;
+    margin-bottom: 8vh;
+    position: fixed; /* Fija la navegación en la parte superior */
+    top: 0; /* Alinea al borde superior de la pantalla */
+    left: 0; /* Alinea al borde izquierdo de la pantalla */
+    width: 98vw; /* Asegura que la barra de navegación ocupe todo el ancho de la pantalla */
+    z-index: 1000; /* Asegura que la barra de navegación esté por encima de otros elementos */
 }
 
-.task-card {
+nav span {
+    font-weight: bold;
+}
+
+nav a {
+    text-decoration: none;
+    padding: 10px 15px;
     border-radius: 4px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
+    transition: background-color 0.3s, color 0.3s;
+    margin: 0 10px; /* Ajusta el espacio entre los enlaces */
 }
 
-.pending {
-    background-color: #ffffe6; 
-    border-left: 5px solid #ffcc66;
+
+/* Navigation Buttons */
+.btn-menuBar-CerrarSesion {
+    background-color: var(--color-danger);
+    color: var(--color-light);
 }
 
-.completed {
-    background-color: #e6ffe6;
-    border-left: 5px solid #66cc66;
+.btn-menuBar-CerrarSesion:hover {
+    background-color: var(--color-danger-dark);
 }
 
-.overdue {
-    background-color: #ffe6e6;
-    border-left: 5px solid #ff6666;
+.btn-menuBar-IniciarSesion {
+    background-color: var(--color-secondary);
+    color: var(--color-light);
+    margin-right: 10px;
 }
 
+.btn-menuBar-IniciarSesion:hover {
+    background-color: var(--color-primary);
+}
+
+.btn-menuBar-Registrarse {
+    background-color: var(--color-success);
+    color: var(--color-light);
+}
+
+.btn-menuBar-Registrarse:hover {
+    background-color: var(--color-success-dark);
+}
+
+/* Main Content */
+.main-content {
+    flex: 3;
+    padding-right: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    color: var(--color-dark);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form Styles */
 form {
     margin-bottom: 20px;
 }
 
-input[type="text"], input[type="password"], textarea, select {
-    width: 100%;
-    padding: 5px;
+form div {
+    margin-bottom: 15px;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="date"],
+#search {
+    width: 100%; /* Ajusta al 100% del ancho del contenedor */
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--color-gray-dark);
+    box-sizing: border-box;
     margin-bottom: 10px;
 }
 
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
+input[type="submit"],
+button,
+a.btn,
+.btn-submit {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    text-decoration: none;
+    text-align: center;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    width: 100%;
 }
 
-input[type="submit"]:hover {
-    background-color: #45a049;
+input[type="submit"]:hover,
+button:hover,
+a.btn:hover,
+.btn-submit:hover {
+    background-color: var(--color-primary-dark);
 }
 
-.dashboard-container {
+/* Task Cards */
+.task-card {
+    --main-color: var(--color-secondary); /* Color principal de la tarjeta */
+    --submain-color: var(--color-gray-light); /* Color secundario */
+    --bg-color: var(--color-light); /* Color de fondo */
+    
+    position: relative;
+    width: 300px; /* Ajusta el tamaño según sea necesario */
+    height: auto; /* Permite que la altura se ajuste al contenido */
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    background-color: var(--bg-color-block);
+    border: 1px solid var(--color-gray-dark); /* Borde de la tarjeta */
+    padding: 15px;
+    margin-bottom: 15px;
 }
 
-.main-content {
-    width: 70%;
-    margin: 20px;
+/* Estilos para el contenedor de botones en la parte inferior */
+.task-card-actions {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los botones */
+    width: 100%; /* Asegura que los botones ocupen todo el ancho disponible */
+    margin-top: auto; /* Empuja el contenedor de botones hacia abajo */
+    gap: 10px; /* Espacio entre los botones */
 }
 
+/* Estilos para los botones */
+.task-card-actions a {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 4px;
+    color: var(--color-light);
+    text-decoration: none;
+    background-color: var(--color-primary); /* Color de fondo del botón */
+    transition: background-color 0.3s;
+    text-align: center;
+    font-weight: 700;
+    font-size: 11px;
+}
+
+.task-card-actions a:hover {
+    background-color: var(--color-primary-dark); /* Color de fondo al pasar el cursor */
+}
+
+/* Botones específicos si es necesario */
+.task-card-actions .btn-edit {
+    background-color: var(--color-secondary);
+}
+
+.task-card-actions .btn-delete {
+    background-color: var(--color-danger);
+}
+
+.task-card-actions .btn-complete {
+    background-color: var(--color-success);
+}
+
+
+/* Sidebar */
 .sidebar {
-    width: 25%;
+    flex: 1;
+    padding-left: 20px;
+    background-color: var(--color-gray);
+    border-radius: 8px;
     padding: 20px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
 }
 
-.team-members {
-    margin-top: 20px;
+.sidebar h3 {
+    margin-top: 0;
+}
+
+.team-members h4 {
+    margin-bottom: 10px;
 }
 
 .members-list {
+    margin-top: 10px;
     max-height: 300px;
     overflow-y: auto;
 }
 
 .member-card {
-    background-color: white;
     padding: 10px;
     margin-bottom: 10px;
-    border-radius: 5px;
+    background-color: var(--color-light);
+    border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Input Group */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.input-field {
+    width: 20vw;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid var(--color-gray-dark);
+    border-radius: 4px;
+    background-color: var(--color-gray-light);
+    color: var(--color-dark);
+}
+
+.input-field:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    background-color: var(--color-gray);
+}
+
+/* Sign Up Link */
+.signup-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #737373;
+}
+
+.signup-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
 }

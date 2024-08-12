@@ -1,25 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Register</h2>
-<form method="POST">
-    {{ form.hidden_tag() }}
+<div class="container">
+  <div class="form-wrapper">
     <div>
-        {{ form.username.label }}
-        {{ form.username() }}
+      <h2>Registrate</h2>
     </div>
-    <div>
-        {{ form.password.label }}
-        {{ form.password() }}
-    </div>
-    <div>
-        {{ form.confirm_password.label }}
-        {{ form.confirm_password() }}
-    </div>
-    <div>
-        {{ form.team.label }}
-        {{ form.team() }}
-    </div>
-    {{ form.submit() }}
-</form>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="input-group">
+        <label for="username">{{ form.username.label.text }}</label>
+        {{ form.username(class_="input-field") }}
+      </div>
+      <div class="input-group">
+        <label for="password">{{ form.password.label.text }}</label>
+        {{ form.password(class_="input-field") }}
+      </div>
+      <div class="input-group">
+        <label for="confirm_password">{{ form.confirm_password.label.text }}</label>
+        {{ form.confirm_password(class_="input-field") }}
+      </div>
+      <div class="input-group">
+        <label for="team">{{ form.team.label.text }}</label>
+        {{ form.team(class_="input-field") }}
+      </div>
+      <div>
+        {{ form.submit(class_="btn-submit") }}
+      </div>
+    </form>
+    <div class="signup-link">
+        Ya tienes cuenta? <a href="{{ url_for('login') }}">Inicia sesión aquí</a>
+      </div>
+  </div>
+</div>
 {% endblock %}

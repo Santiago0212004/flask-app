@@ -7,50 +7,58 @@
         <form action="{{ url_for('add_task') }}" method="POST">
             {{ form.hidden_tag() }}
             <div>
-                {{ form.content.label }}
-                {{ form.content() }}
+                <label for="content">{{ form.content.label.text }}</label>
+                {{ form.content(class_="h-10 text-sm rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full") }}
             </div>
             <div>
-                {{ form.due_date.label }}
-                {{ form.due_date(type='date') }}
+                <label for="due_date">{{ form.due_date.label.text }}</label>
+                {{ form.due_date(type='date', class_="h-10 text-sm rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full") }}
             </div>
-            {{ form.submit() }}
+            <div>
+                {{ form.submit(class_="inline-flex items-center justify-center rounded-md text-sm font-medium bg-blue-500 text-white hover:bg-blue-400 h-10 px-4 py-2 w-full cursor-pointer") }}
+            </div>
         </form>
 
-        <input type="text" id="search" placeholder="Search tasks...">
+        <input type="text" id="search" class="h-10 text-sm rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" placeholder="Search tasks...">
 
         <div id="tasks">
             {% for task in tasks %}
-                <div class="task-card 
-                    {% if task.is_completed %}
-                        completed
-                    {% elif task.due_date < now %}
-                        overdue
-                    {% else %}
-                        pending
-                    {% endif %}"
-                >
-                    {% if task.is_completed %}
-                        <p>Estado: Completada</p>
-                    {% elif task.due_date < now %}
-                        <p>Estado: Sin completar (atrasada)</p>
-                    {% else %}
-                        <p>Estado: Sin completar</p>
-                    {% endif %}
-                    <p>{{ task.content }}</p>
-                    <p>Fecha de entrega: {{ task.due_date.strftime('%Y-%m-%d') }}</p>
-                    <p>Autor: {{ task.author.username }}</p>
-                    <a href="{{ url_for('toggle_task', task_id=task.id) }}">
-                        {% if task.is_completed %}Marcar como pendiente{% else %}Marcar como completada{% endif %}
-                    </a>
-                    <button onclick="showEditForm({{ task.id }})">Edit</button>
-                    <a href="{{ url_for('delete_task', task_id=task.id) }}">Eliminar</a>
-                    <form id="edit-form-{{ task.id }}" style="display: none;" action="{{ url_for('edit_task', task_id=task.id) }}" method="POST">
-                        <input type="date" name="new_due_date" value="{{ task.due_date.strftime('%Y-%m-%d') }}">
-                        <input type="submit" value="Update">
-                    </form>
-                </div>
-            {% endfor %}
+    <div class="task-card 
+        {% if task.is_completed %}
+            completed
+        {% elif task.due_date < now %}
+            overdue
+        {% else %}
+            pending
+        {% endif %}"
+    >
+        {% if task.is_completed %}
+            <p>Estado: Completada</p>
+        {% elif task.due_date < now %}
+            <p>Estado: Sin completar (atrasada)</p>
+        {% else %}
+            <p>Estado: Sin completar</p>
+        {% endif %}
+        <p>{{ task.content }}</p>
+        <p>Fecha de entrega: {{ task.due_date.strftime('%Y-%m-%d') }}</p>
+        <p>Autor: {{ task.author.username }}</p>
+        
+        <!-- Contenedor para los botones -->
+        <div class="task-card-actions">
+            <a class="btn-complete" href="{{ url_for('toggle_task', task_id=task.id) }}">
+                {% if task.is_completed %}Marcar como pendiente{% else %}Marcar como completada{% endif %}
+            </a>
+            <button class="btn-edit" onclick="showEditForm({{ task.id }})">Edit</button>
+            <a class="btn-delete" href="{{ url_for('delete_task', task_id=task.id) }}">Eliminar</a>
+        </div>
+
+        <!-- Formulario de edición oculto -->
+        <form id="edit-form-{{ task.id }}" style="display: none;" action="{{ url_for('edit_task', task_id=task.id) }}" method="POST">
+            <input type="date" name="new_due_date" value="{{ task.due_date.strftime('%Y-%m-%d') }}" class="h-10 text-sm rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+            <input type="submit" value="Update" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-blue-500 text-white hover:bg-blue-400 h-10 px-4 py-2 w-full cursor-pointer">
+        </form>
+    </div>
+{% endfor %}
         </div>
     </div>
     

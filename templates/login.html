@@ -1,17 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Login</h2>
-<form method="POST">
-    {{ form.hidden_tag() }}
+<div class="container">
+  <div class="form-wrapper">
     <div>
-        {{ form.username.label }}
-        {{ form.username() }}
+      <h2>Ingresa tu cuenta</h2>
     </div>
-    <div>
-        {{ form.password.label }}
-        {{ form.password() }}
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="input-group">
+        <label for="username">{{ form.username.label.text }}</label>
+        {{ form.username(class_="input-field") }}
+      </div>
+      <div class="input-group">
+        <label for="password">{{ form.password.label.text }}</label>
+        {{ form.password(class_="input-field") }}
+      </div>
+      <div>
+        {{ form.submit(class_="btn-submit") }}
+      </div>
+    </form>
+    <div class="signup-link">
+      No tienes cuenta? <a href="{{ url_for('register') }}">Registrate aquí</a>
     </div>
-    {{ form.submit() }}
-</form>
+  </div>
+</div>
 {% endblock %}
