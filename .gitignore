@@ -4,4 +4,5 @@ venv/
 __pycache__/
 instance/
 .env
+.venv/
 database.db
